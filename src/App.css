@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+body{
+    background-color: #F4ECE1;
+    font-family: "Poppins", sans-serif;
+    user-select: none;
+    color: #2F2F2F;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-container{
+    max-width: 1250px;
+    margin: 0 auto;
+}
+.titles{
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    margin: 120px 0 30px;
+}
+.meal-title{
+    color: #FF7E00;
+    font-weight: 900;
+    font-size: 100px;
+    text-shadow: 2px 3px 2px rgba(0,0,0,0.6);
+    padding-right: 5px;
+    margin: 0;
+}
+.meal-title-two{
+    font-size: 50px;
+    font-weight: 900;
+    margin: 0;
+}
+.main-nav{
+    padding: 20px 0;
+}
+.logo{
+    font-size: 20px;
+    font-weight: 700;
+    color: #2F2F2F;
+    text-decoration: none;
+}
+.logo-txt{
+    margin-left: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.meal-item{
+    font-family: "Poppins", sans-serif;
+    background: #fff;
+    box-shadow: 0 0 27px #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.meal-time{
+    color: #909090;
+    text-transform: capitalize;
+    margin: 0 0 10px;
+    font-size: 14px;
 }
-
-.App-link {
-  color: #61dafb;
+.meal-description{
+    margin: 0;
+    font-size: 18px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.meal-kcal{
+    font-weight: bold;
+    margin-right: 30px;
+}
+.meal-info{
+    display: flex;
+    margin-left: auto;
+}
+.delete-btn{
+    border: none;
+    background: transparent;
+}
+.edit-img,
+.delete-img{
+    width: 30px;
+    height: 30px;
+}
+.main-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calories-info{
+    margin-top: 40px;
 }
