@@ -1,20 +1,23 @@
 import React, {useState} from 'react';
 import {MEALS} from "../../constants";
 import {IMealMutation} from "../../types";
+import BtnSpinner from "../Spinner/BtnSpinner";
 
 interface IProps {
     onSubmit: (newMeal: IMealMutation) => void;
     existingMeal?: IMealMutation;
     isEdit?: boolean;
+    isUpdating: boolean;
 }
 
 const initialState = {
     calories: '',
     description: '',
     time: '',
+    date: '',
 };
 
-const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, isEdit}) => {
+const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, isEdit, isUpdating = false}) => {
     const[newMeal, setMeal] = useState<IMealMutation>(existingMeal);
     const mealChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>{
         const name = e.target.name;
@@ -39,7 +42,7 @@ const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, is
     return (
         <form className="main-form" onSubmit={onFormSubmit}>
             <div className="form-group mb-3">
-                <label htmlFor="time" className="mb-2">Meal time</label>
+                <label htmlFor="time" className="mb-2">Meal time:</label>
                 <select
                     value={newMeal.time}
                     required
@@ -54,7 +57,7 @@ const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, is
                 </select>
             </div>
             <div className="form-group mb-3">
-                <label htmlFor="description" className="mb-2">Describe meal</label>
+                <label htmlFor="description" className="mb-2">Describe meal:</label>
                 <input
                     type="text"
                     name="description"
@@ -65,7 +68,7 @@ const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, is
                 />
             </div>
             <div className="form-group mb-3">
-                <label htmlFor="calories" className="mb-2">Calories</label>
+                <label htmlFor="calories" className="mb-2">Calories:</label>
                 <input
                     type="number"
                     name="calories"
@@ -75,7 +78,22 @@ const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, is
                     onChange={mealChange}
                 />
             </div>
-            <button type="submit" className="btn btn-warning">
+            <div className="form-group mb-3">
+                <label htmlFor="calories" className="mb-2">Date:</label>
+                <input type="date"
+                       name="date"
+                       id="date"
+                       className="form-control"
+                       onChange={mealChange}
+                       value={newMeal.date}
+                />
+            </div>
+            <button
+                type="submit"
+                disabled={isUpdating}
+                className="btn btn-warning"
+            >
+                {isUpdating && <BtnSpinner/>}
                 {isEdit ? 'Save' : 'Create'}
             </button>
         </form>

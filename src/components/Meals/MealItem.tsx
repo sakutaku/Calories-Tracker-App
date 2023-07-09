@@ -16,13 +16,15 @@ const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
             await axiosApi.delete<IMealMutation>(`/meals/${id}.json`);
             await fetchMeals();
         } finally {
-            alert('Post deleted!');
+            alert('Meal deleted!');
         }
     };
 
 
     const onDeletePost = (id: string) => {
-        void fetchDelete(id);
+        if(window.confirm('Do you want to delete meal?')) {
+            void fetchDelete(id);
+        }
     };
 
     return (
@@ -33,7 +35,8 @@ const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
             </div>
             <div className="meal-info">
                 <div className="meal-kcal">
-                    {meal.calories} kcal
+                    <div className=" text-center"><b>{meal.calories} kcal</b></div>
+                    <div><i>Date: {meal.date}</i></div>
                 </div>
                 <div className="meal-btns">
                     <Link to={'/meals/' + meal.id + '/edit'}>

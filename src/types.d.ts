@@ -3,6 +3,7 @@ export interface IMeal {
     calories: number;
     description: string;
     time: string;
+    date: string;
 }
 
 export interface IApiMeal {
@@ -13,6 +14,5 @@ export interface IMealMutation {
     calories: string;
     description: string;
     time: string;
+    date: string;
 }
-
-// export type TApiMeal = Omit<IMeal, 'id'>;
