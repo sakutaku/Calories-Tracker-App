@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {MEALS} from "../../constants";
 import {IMealMutation} from "../../types";
-import axiosApi from "../../axiosApi";
 
 interface IProps {
+    onSubmit: (newMeal: IMealMutation) => void;
     existingMeal?: IMealMutation;
     isEdit?: boolean;
 }
@@ -14,9 +14,8 @@ const initialState = {
     time: '',
 };
 
-const MealsForm: React.FC<IProps> = ({ existingMeal = initialState, isEdit}) => {
+const MealsForm: React.FC<IProps> = ({ onSubmit, existingMeal = initialState, isEdit}) => {
     const[newMeal, setMeal] = useState<IMealMutation>(existingMeal);
-
     const mealChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>{
         const name = e.target.name;
         const value = e.target.value;
@@ -27,22 +26,14 @@ const MealsForm: React.FC<IProps> = ({ existingMeal = initialState, isEdit}) => 
         }));
     };
 
-    const onFormSubmit = async (e: React.FormEvent) => {
+    const onFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
         if(newMeal.description !== '' && newMeal.calories !== '') {
-            const data = {
-                ...newMeal,
-            };
-            try{
-                await axiosApi.post(`/meals.json`, data);
-            } finally {
-                alert('Контент изменен!');
-            }
-
+            onSubmit({...newMeal});
         } else {
             alert('Add meal description!');
         }
+
     };
 
     return (
@@ -84,7 +75,9 @@ const MealsForm: React.FC<IProps> = ({ existingMeal = initialState, isEdit}) => 
                     onChange={mealChange}
                 />
             </div>
-            <button type="submit" className="btn btn-warning">Save</button>
+            <button type="submit" className="btn btn-warning">
+                {isEdit ? 'Save' : 'Create'}
+            </button>
         </form>
     );
 };

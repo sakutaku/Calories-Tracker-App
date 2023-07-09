@@ -85,7 +85,11 @@ body{
 .calories-info{
     margin-top: 40px;
 }
-.addmeal-page-title{
+.main-form{
+    font-family: "Poppins", sans-serif;
+}
+.addmeal-page-title,
+.editmeal-page-title{
     font-family: "Poppins", sans-serif;
     color: #FF7E00;
     font-weight: 900;

@@ -6,6 +6,7 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import Home from "./containers/Home/Home";
 import './App.css';
 import AddMeal from "./containers/AddMeal/AddMeal";
+import EditMeal from "./containers/EditMeal/EditMeal";
 const App = () => {
   const [meals, setMeals] = useState<IMeal[]>([]);
   const [loading, setLoading] = useState(false);
@@ -52,6 +53,9 @@ const App = () => {
         )}/>
         <Route path="/meals/new" element={(
             <AddMeal/>
+        )}/>
+        <Route path={'/meals/:id/edit'} element={(
+            <EditMeal/>
         )}/>
       </Routes>
 

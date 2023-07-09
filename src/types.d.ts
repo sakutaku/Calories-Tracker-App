@@ -15,4 +15,4 @@ export interface IMealMutation {
     time: string;
 }
 
-export type TApiMeal = Omit<IMeal, 'id'>;
+// export type TApiMeal = Omit<IMeal, 'id'>;

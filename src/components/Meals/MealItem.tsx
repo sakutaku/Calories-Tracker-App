@@ -36,7 +36,7 @@ const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
                     {meal.calories} kcal
                 </div>
                 <div className="meal-btns">
-                    <Link to={'/meals' + meal.id + '/edit'}>
+                    <Link to={'/meals/' + meal.id + '/edit'}>
                         <img src={editImg} alt="edit-img" className="edit-img"/>
                     </Link>
                     <button type="button" className="delete-btn" onClick={() => onDeletePost(meal.id)}>

@@ -30,7 +30,7 @@ const Home: React.FC<IProps> = ({meals, loading, fetchMeals}) => {
                     </div>
                     <div className="main-img calories-info">
                         <span>Total calories: </span>
-                        <Link to="/meals/new">Add new meal</Link>
+                        <Link to="/meals/new" className="btn btn-warning ms-3">Add new meal</Link>
                     </div>
                 </div>
             </div>
