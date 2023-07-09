@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import axiosApi from "./axiosApi";
 import {IApiMeal, IMeal} from "./types";
-import {useLocation} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import Toolbar from "./components/Toolbar/Toolbar";
 import Home from "./containers/Home/Home";
 import './App.css';
+import AddMeal from "./containers/AddMeal/AddMeal";
 const App = () => {
   const [meals, setMeals] = useState<IMeal[]>([]);
   const [loading, setLoading] = useState(false);
@@ -13,19 +14,22 @@ const App = () => {
   const fetchData = useCallback(async () => {
     try{
       setLoading(true);
-      const mealsResponse = await axiosApi.get<IApiMeal>('/meals.json');
-      if(mealsResponse.data) {
-        const allMeals = Object.keys(mealsResponse.data).map((key) => {
-          const meal = mealsResponse.data[key];
-          meal.id = key;
+      const mealsResponse = await axiosApi.get<IApiMeal | null>('/meals.json');
+      const mealsData = mealsResponse.data;
 
-          return meal;
-        });
-
-        setMeals(allMeals);
-      } else {
-        console.log('No posts!');
+      if(!mealsData) {
+        setMeals([]);
+        return;
       }
+
+      const allMeals = Object.keys(mealsData).map((key) => {
+        const meal = mealsData[key];
+        meal.id = key;
+
+        return meal;
+      });
+      setMeals(allMeals);
+
     } finally {
       setLoading(false);
     }
@@ -42,7 +46,15 @@ const App = () => {
       <header>
         <Toolbar/>
       </header>
-      <Home meals={meals} loading={loading} fetchMeals={fetchData}/>
+      <Routes>
+        <Route path="/" element={(
+            <Home meals={meals} loading={loading} fetchMeals={fetchData}/>
+        )}/>
+        <Route path="/meals/new" element={(
+            <AddMeal/>
+        )}/>
+      </Routes>
+
     </div>
   );
 };

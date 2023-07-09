@@ -10,7 +10,9 @@ export interface IApiMeal {
 }
 
 export interface IMealMutation {
-    calories: number;
+    calories: string;
     description: string;
     time: string;
 }
+
+export type TApiMeal = Omit<IMeal, 'id'>;

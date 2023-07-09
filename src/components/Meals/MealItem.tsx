@@ -1,6 +1,6 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {IMeal, IMealMutation} from "../../types";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import editImg from "../../assets/edit-img.png";
 import deleteImg from "../../assets/trash.svg";
 import axiosApi from "../../axiosApi";
@@ -10,17 +10,15 @@ interface IProps {
     fetchMeals: () => void;
 }
 const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
-    const navigate = useNavigate();
+    const fetchDelete = async (id: string) => {
 
-    const fetchDelete = useCallback(async (id: string) => {
         try {
             await axiosApi.delete<IMealMutation>(`/meals/${id}.json`);
-            fetchMeals();
-            navigate('/');
+            await fetchMeals();
         } finally {
             alert('Post deleted!');
         }
-    }, []);
+    };
 
 
     const onDeletePost = (id: string) => {
