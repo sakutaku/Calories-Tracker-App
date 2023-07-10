@@ -34,7 +34,7 @@ const Home: React.FC<IProps> = ({meals, loading, fetchMeals}) => {
     if(!loading) {
         return (
             <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                     <div className="titles">
                         <h1 className=" meal-title">Fast</h1>
                         <h2 className=" meal-title-two">Calories tracker</h2>
@@ -43,7 +43,7 @@ const Home: React.FC<IProps> = ({meals, loading, fetchMeals}) => {
                         <Meals meals={meals} fetchMeals={fetchMeals}/>
                     </div>
                 </div>
-                <div className="col-8">
+                <div className="col-9">
                     <div className="main-img">
                         <img src={mainImg} alt="main-img"/>
                     </div>

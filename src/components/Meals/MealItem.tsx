@@ -1,25 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IMeal, IMealMutation} from "../../types";
 import {Link} from "react-router-dom";
 import editImg from "../../assets/edit-img.png";
 import deleteImg from "../../assets/trash.svg";
 import axiosApi from "../../axiosApi";
+import BtnSpinner from "../Spinner/BtnSpinner";
 
 interface IProps {
     meal: IMeal;
     fetchMeals: () => void;
 }
 const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
+    const [isDeleting, setIsDeleting] = useState(false);
     const fetchDelete = async (id: string) => {
-
         try {
+            setIsDeleting(true);
             await axiosApi.delete<IMealMutation>(`/meals/${id}.json`);
             await fetchMeals();
         } finally {
+            setIsDeleting(false);
             alert('Meal deleted!');
         }
     };
-
 
     const onDeletePost = (id: string) => {
         if(window.confirm('Do you want to delete meal?')) {
@@ -42,8 +44,18 @@ const MealItem: React.FC<IProps> = ({meal, fetchMeals}) => {
                     <Link to={'/meals/' + meal.id + '/edit'}>
                         <img src={editImg} alt="edit-img" className="edit-img"/>
                     </Link>
-                    <button type="button" className="delete-btn" onClick={() => onDeletePost(meal.id)}>
-                        <img src={deleteImg} alt="delete-img" className="delete-img"/>
+                    <button
+                        type="button"
+                        className="delete-btn"
+                        onClick={() => onDeletePost(meal.id)}
+                        disabled={isDeleting}
+                    >
+                        {isDeleting && <BtnSpinner/>}
+                        <img
+                            src={deleteImg}
+                            alt="delete-img"
+                            className="delete-img"
+                        />
                     </button>
                 </div>
             </div>
