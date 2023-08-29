@@ -1,5 +1,5 @@
 # Calories Tracker App
-This is a Personal Budget App, where you can count the budget you have earned or wasted, using either categories or transactions. The code is divided into functional components, React CRUD method is realized, hooks useState, useEffect are applied, ReactJs is used.
+This is a Calories Tracker App, where you can track calories you ate. The code is divided into functional components, React CRUD method is realized, hooks useState, useEffect are applied, ReactJs is used.
 
 To start the project, you need to do the following:
 
